@@ -8,7 +8,8 @@
 #include <cstdlib>
 #include <string>
 #include <fstream>
-
+#include <chrono>
+#include <ctime>
 
 #include "Game.h"
 
@@ -46,6 +47,17 @@ void Game::dealCard(std::list<Player>::iterator i) {
     }
     // Assigns the deck on top of the stack to the temp variable in order to deliver it
     (*i).pushCard(decks.top().dealCard(count));
+
+    if (decks.top().dealCard(count).value >= 2 && decks.top().dealCard(count).value <= 6) {
+        runningCount += 1;
+    } else if (decks.top().dealCard(count).value >= 7 && decks.top().dealCard(count).value <= 9) {
+        runningCount += 0;
+    } else if (decks.top().dealCard(count).value >= 10) {
+        runningCount -= 1;
+    } else if (decks.top().dealCard(count).value == 1) {
+        runningCount -= 1;
+    }
+    trueCount = (runningCount - (4 * NUM_STACK)) / decks.size(); // Refreshes the value of the true count
     count++;
 }
 
@@ -57,6 +69,8 @@ void Game::start() {
         std::cout << "\n" << (*i).getUserName() << " :";
         (*i).displayCards();
     }
+    std::cout << "\n\n\tRunning Count: " << runningCount;
+    std::cout << "\n\tTrue Count: " << trueCount;
     i = players.begin();
     std::cout << "\n\n\tEnter the amount of money you wish to bet (MAX: $" << (*i).getMoneyToBet() << "): ";
     std::cin >> betAmount;
@@ -128,6 +142,8 @@ void Game::computerGame() {
 void Game::quit() {
     isOver = false;
     gameInfo(records);
+    setMyRecords(myRecords);
+    getMyRecords(myRecords_2);
 }
 
 void Game::displayCards() {
@@ -135,6 +151,8 @@ void Game::displayCards() {
         std::cout << "\n" << (*i).getUserName() << " :";
         (*i).displayCards();
     }
+    std::cout << "\n\n\tRunning Count: " << runningCount;
+    std::cout << "\n\tTrue Count: " << trueCount;
 }
 
 int Game::whoWins() {
@@ -171,7 +189,8 @@ void Game::declareWinner(int option) {
         std::advance(i, 1);
         (*i).setMoneyToBet((betAmount*-1)); //Deduct from looser
         std::cout << "\n\tLooser (Computer): $" << (*i).getMoneyToBet() << " Count: " << (*i).getCount();
-        ;
+        std::cout << "\n\tRunning Count: " << runningCount;
+        std::cout << "\n\tTrue Count: " << trueCount;
     } else if (option == 2) {
         std::cout << "\n**************************************************************************\n" <<
                 "**************************************************************************\n" <<
@@ -183,6 +202,8 @@ void Game::declareWinner(int option) {
         std::advance(i, 1);
         (*i).setMoneyToBet(betAmount); //Adds to the winner
         std::cout << "\n\tWinner (Computer): $" << (*i).getMoneyToBet() << " Count: " << (*i).getCount();
+        std::cout << "\n\tRunning Count: " << runningCount;
+        std::cout << "\n\tTrue Count: " << trueCount;
     } else {
         std::cout << "\n**************************************************************************\n" <<
                 "**************************************************************************\n" <<
@@ -192,15 +213,17 @@ void Game::declareWinner(int option) {
         std::cout << "\n\n\tPlayer 1 (You): $" << (*i).getMoneyToBet() << " Count: " << (*i).getCount();
         std::advance(i, 1);
         std::cout << "\n\tPlayer 2 (Computer): $" << (*i).getMoneyToBet() << " Count: " << (*i).getCount();
+        std::cout << "\n\tRunning Count: " << runningCount;
+        std::cout << "\n\tTrue Count: " << trueCount;
     }
-    gameInfo(records); //Prints records of the game onto a outside txt file
     quit(); // quits game
 }
 
 void Game::gameInfo(std::ofstream& file) {
+    time_t my_time = time(NULL);
     file.open("records.txt", std::ios_base::app); // Appends to records.txt
     if (file.is_open()) {
-        file << "\n\tBLACJACK\n";
+        file << "\n\tBLACJACK   " << std::ctime(&my_time) << std::endl;
         i = players.begin();
         file << "\n" << (*i).getUserName() << " :";
         (*i).printCards(file);
@@ -209,16 +232,17 @@ void Game::gameInfo(std::ofstream& file) {
         file << "\n" << (*i).getUserName() << " :";
         (*i).printCards(file);
         file << "\nBank: $" << (*i).getMoneyToBet() << std::endl;
+        file << "\n\tRunning Count: " << runningCount;
+        file << "\n\tTrue Count: " << trueCount << std::endl << std::endl;
         file.close();
     } else {
         std::cout << "\n\tError: Unable to open file";
-        play();
     }
 }
 
 bool Game::askUser(bool &game) {
     unsigned short int option = 0;
-    std::cout << "\n\n\t1. Continue Playing\n\t0. Quit\n\t Choice: ";
+    std::cout << "\n\n\t0. Quit\n\t1. Continue Playing\n\t2. Game History\n\tChoice: ";
     std::cin >> option;
     while (option > 1 && option < 0) {
         std::cout << "\n\tInvalid Input!\n\n\t1. Continue Playing\n\t0. Quit\n\t Choice: ";
@@ -234,8 +258,80 @@ bool Game::askUser(bool &game) {
     } else if (option == 0) {
         game = false;
         return false;
+    } else if (option == 2) {
+        getPrevGames(myRecords_2);
+        i = players.begin();
+        (*i).emptyCards();
+        std::advance(i, 1);
+        (*i).emptyCards();
+        askUser(game);
     } else
         return false;
 }
 
+void Game::setMyRecords(std::ofstream& file) {
+    short int rslt = 0;
+    file.open("myRecords.txt", std::ios_base::app); // Appends to records.txt
+    if (file.is_open()) {
+        rslt = whoWins();
+        if (rslt == 1) {
+            file << "Won" << std::endl;
+        } else if (rslt == 2) {
+            file << "Lost" << std::endl;
+        } else {
+            file << "Tie" << std::endl;
+        }
+        file.close();
+    } else {
+        std::cout << "\n\tError: Unable to open file";
+    }
+}
+
+void Game::getMyRecords(std::ifstream& file) {
+    std::string word;
+    float count = 0.0f, games = 0.0f, eff = 0.0f;
+    file.open("myRecords.txt"); // Appends to records.txt
+    if (file.is_open()) {
+        while (file >> word) {
+            if (word == "Won") {
+                count++;
+                games++;
+            } else if (word == "Lost") {
+                count--;
+                games++;
+            } else if (word == "Tie") {
+                games++;
+            }
+        }
+        if (games > 0) {
+            eff = ((count / games)*100);
+            std::cout << "\n\tYour Record: " << eff << "% effective";
+        }
+        file.close();
+    } else {
+        std::cout << "\n\tError: Unable to open file";
+    }
+}
+
+void Game::getPrevGames(std::ifstream& file) {
+    std::string word;
+    int count = 0;
+    file.open("myRecords.txt"); // Appends to records.txt
+    if (file.is_open()) {
+        while (file >> word) {
+            myPrevGames.insert(pair<int, std::string>((count + 1), word));
+            count++;
+        }
+        file.close();
+        map<int, std::string>::iterator k;
+        cout << "\n\n\tGame History : \n";
+        cout << "\tGame\tOutcome\n";
+        for (k = myPrevGames.begin(); k != myPrevGames.end(); ++k) {
+            cout << '\t' << k->first
+                    << '\t' << k->second << '\n';
+        }
+    } else {
+        std::cout << "\n\tError: Unable to open file";
+    }
+}
 

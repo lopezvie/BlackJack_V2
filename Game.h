@@ -9,6 +9,7 @@
 #include <list>
 #include <stack>
 #include <fstream>
+#include <map>
 #include <string>
 
 #include "Deck.h"
@@ -22,7 +23,10 @@ private:
     std::list<Player> players; //This version only has 2 players ( user and the computer)
     std::stack<Deck> decks;
     std::list<Player>::iterator i;
+    std::map<int, std::string> myPrevGames;
     std::ofstream records; //Text File
+    std::ofstream myRecords; //Text File
+    std::ifstream myRecords_2;
     const unsigned short int NUM_PLYRS = 2; // This version only takes into consideration the scenario of only two players
     const unsigned short int NUM_STACK = 8; // Number of decks in a standard stack 
     unsigned short int count = 0; // Keeps track of cards delivered in a stack (8 stacks total)
@@ -30,6 +34,8 @@ private:
     bool isProgramRunning = true;
     unsigned short int choice = 0; //Keeps record of the choice selected by player from menu (options)
     int betAmount = 0; // keeps record of the amount of the bet
+    float runningCount = 0; // Keeps record of the running count at any given hand
+    float trueCount = 0; // Keeps record of the true count at any given hand
 public:
     Game(); // Constructor assigns users name and initially $2500 per player
     ~Game();
@@ -52,6 +58,9 @@ public:
      * ****************************************************************************************************************************
      ******************************************************************************************************************************/
     void gameInfo(std::ofstream &); // records cards given and counts on records.txt
+    void getMyRecords(std::ifstream &);
+    void setMyRecords(std::ofstream &);
+    void getPrevGames(std::ifstream &);
 };
 
 

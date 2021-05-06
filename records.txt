@@ -1,0 +1,345 @@
+
+	BLACJACK   Wed May 05 18:03:39 2021
+
+
+Player (You) :
+Clubs 3
+Diamonds 6
+Clubs 4
+Clubs 8
+ count: 21
+
+Bank: $3000
+
+Player (Computer) :
+Hearts 3
+Spades 4
+Diamonds King
+ count: 17
+
+Bank: $2000
+
+	Running Count: 4
+	True Count: -3.5
+
+
+	BLACJACK   Wed May 05 18:04:26 2021
+
+
+Player (You) :
+Spades Ace
+Diamonds Queen
+Diamonds 10
+ count: 21
+
+Bank: $3250
+
+Player (Computer) :
+Spades 2
+Hearts Ace
+Hearts Jack
+Spades 9
+ count: 22
+
+Bank: $1750
+
+	Running Count: 0
+	True Count: -4
+
+
+	BLACJACK   Wed May 05 18:05:44 2021
+
+
+Player (You) :
+Hearts 4
+Diamonds 9
+Clubs Queen
+ count: 23
+
+Bank: $3000
+
+Player (Computer) :
+Diamonds 2
+Diamonds Jack
+Spades 5
+ count: 17
+
+Bank: $2000
+
+	Running Count: 1
+	True Count: -3.875
+
+
+	BLACJACK   Wed May 05 18:06:58 2021
+
+
+Player (You) :
+Diamonds 3
+Diamonds 9
+Spades 10
+ count: 22
+
+Bank: $2250
+
+Player (Computer) :
+Clubs 3
+Clubs Queen
+Spades 6
+ count: 19
+
+Bank: $2750
+
+	Running Count: 1
+	True Count: -3.875
+
+
+	BLACJACK   Wed May 05 18:07:15 2021
+
+
+Player (You) :
+Spades Jack
+Clubs 4
+ count: 14
+
+Bank: $2500
+
+Player (Computer) :
+Clubs King
+Hearts 6
+Hearts Jack
+ count: 26
+
+Bank: $2500
+
+	Running Count: 0
+	True Count: -4
+
+
+	BLACJACK   Wed May 05 18:09:59 2021
+
+
+Player (You) :
+Hearts 8
+Hearts 3
+Clubs 8
+ count: 19
+
+Bank: $2750
+
+Player (Computer) :
+Clubs 7
+Hearts 5
+Hearts 6
+ count: 18
+
+Bank: $2250
+
+	Running Count: 3
+	True Count: -3.625
+
+
+	BLACJACK   Wed May 05 18:11:36 2021
+
+
+Player (You) :
+Hearts King
+Diamonds King
+Spades 3
+ count: 23
+
+Bank: $2500
+
+Player (Computer) :
+Clubs 6
+Spades King
+Spades 7
+ count: 23
+
+Bank: $2500
+
+	Running Count: -1
+	True Count: -4.125
+
+
+	BLACJACK   Wed May 05 18:11:46 2021
+
+
+Player (You) :
+Clubs 8
+Spades Queen
+ count: 18
+
+Bank: $2600
+
+Player (Computer) :
+Clubs Jack
+Clubs 3
+Diamonds 9
+ count: 22
+
+Bank: $2400
+
+	Running Count: -2
+	True Count: -4.25
+
+
+	BLACJACK   Wed May 05 18:13:21 2021
+
+
+Player (You) :
+Hearts 9
+Clubs 4
+Diamonds King
+ count: 23
+
+Bank: $2500
+
+Player (Computer) :
+Hearts 2
+Hearts 4
+Spades 6
+Hearts Jack
+ count: 22
+
+Bank: $2500
+
+	Running Count: 2
+	True Count: -3.75
+
+
+	BLACJACK   Wed May 05 18:15:33 2021
+
+
+Player (You) :
+Diamonds 7
+Diamonds 8
+ count: 15
+
+Bank: $2400
+
+Player (Computer) :
+Diamonds 3
+Spades 5
+Clubs Queen
+ count: 18
+
+Bank: $2600
+
+	Running Count: 1
+	True Count: -3.875
+
+
+	BLACJACK   Wed May 05 18:16:40 2021
+
+
+Player (You) :
+Hearts 3
+Hearts 7
+Hearts 2
+Clubs 8
+ count: 20
+
+Bank: $2500
+
+Player (Computer) :
+Clubs 7
+Clubs 5
+Hearts Queen
+ count: 22
+
+Bank: $2500
+
+	Running Count: 3
+	True Count: -3.625
+
+
+	BLACJACK   Wed May 05 18:38:38 2021
+
+
+Player (You) :
+Hearts Queen
+Hearts 3
+Hearts Ace
+ count: 14
+
+Bank: $2250
+
+Player (Computer) :
+Clubs 4
+Diamonds 4
+Clubs 10
+ count: 18
+
+Bank: $2750
+
+	Running Count: 0
+	True Count: -4
+
+
+	BLACJACK   Wed May 05 18:39:36 2021
+
+
+Player (You) :
+Hearts Queen
+Diamonds 9
+ count: 19
+
+Bank: $2750
+
+Player (Computer) :
+Hearts 5
+Spades 10
+Spades 2
+ count: 17
+
+Bank: $2250
+
+	Running Count: 0
+	True Count: -4
+
+
+	BLACJACK   Wed May 05 18:41:06 2021
+
+
+Player (You) :
+Clubs Queen
+Hearts 6
+ count: 16
+
+Bank: $2250
+
+Player (Computer) :
+Hearts 8
+Hearts Ace
+Clubs 8
+ count: 17
+
+Bank: $2750
+
+	Running Count: -1
+	True Count: -4.125
+
+
+	BLACJACK   Wed May 05 18:43:03 2021
+
+
+Player (You) :
+Diamonds 2
+Hearts Queen
+Diamonds 10
+ count: 22
+
+Bank: $2500
+
+Player (Computer) :
+Spades 7
+Clubs Ace
+Diamonds 8
+Diamonds King
+ count: 26
+
+Bank: $2500
+
+	Running Count: -3
+	True Count: -4.375
+
